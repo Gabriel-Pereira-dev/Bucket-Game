@@ -22,8 +22,10 @@ public class PlayerController : MonoBehaviour
        }
        float tempo = Time.deltaTime;
        float movement = Input.GetAxis("Horizontal") * tempo * speed;
-       
-       transform.position += new Vector3(movement,0,0);
-       Debug.Log("Mexeu: "+ movement);
+       float limit = (GameManager.Instance.gameWidth /2) - 2f;
+       float x = Mathf.Clamp(transform.position.x + movement,-limit,limit);
+       float y = transform.position.y;
+       float z = transform.position.z;
+       transform.position = new Vector3(x,y,z);
     }
 }
