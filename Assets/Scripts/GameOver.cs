@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BucketCollisionManager : MonoBehaviour
+public class GameOver : MonoBehaviour
 {
     // Start is called before the first frame update
-    
     void Start()
     {
         
@@ -19,13 +18,14 @@ public class BucketCollisionManager : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        // if(!GameManager.Instance.isGameActive){
-        //     return;
-        // }
+        if(!GameManager.Instance.isGameActive){
+            return;
+        }
+        Debug.Log("Colidiu com GameOver");
         if(other.gameObject.CompareTag("Ball"))
         {
-            GameManager.Instance.AddScore(1);
             Destroy(other.gameObject);
+             GameManager.Instance.GameOver();
              
         }
     }

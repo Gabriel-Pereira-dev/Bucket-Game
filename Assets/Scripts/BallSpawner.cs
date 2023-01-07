@@ -17,11 +17,15 @@ public class BallSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cooldown -= Time.deltaTime;
-        if(cooldown <= 0){
-            cooldown = interval;
-            SpawnBall();
+        if(!GameManager.Instance.isGameActive){
+            return;
         }
+            cooldown -= Time.deltaTime;
+            if(cooldown <= 0){
+                cooldown = interval;
+                SpawnBall();
+            }
+        
     }
 
     void SpawnBall(){

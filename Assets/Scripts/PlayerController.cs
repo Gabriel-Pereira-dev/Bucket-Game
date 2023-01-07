@@ -14,6 +14,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       if(!GameManager.Instance.isGameActive){
+            bool isPressingEnter = Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter);
+            if(isPressingEnter){
+                GameManager.Instance.RestartGame();
+            }
+           return;
+       }
        bool isPressingLeft = Input.GetKey(KeyCode.LeftArrow);
        bool isPressingRight = Input.GetKey(KeyCode.RightArrow);
 
@@ -22,7 +29,7 @@ public class PlayerController : MonoBehaviour
        }
        float tempo = Time.deltaTime;
        float movement = Input.GetAxis("Horizontal") * tempo * speed;
-       float limit = (GameManager.Instance.gameWidth /2) - 2f;
+       float limit = (GameManager.Instance.gameWidth /2)-1.5f;
        float x = Mathf.Clamp(transform.position.x + movement,-limit,limit);
        float y = transform.position.y;
        float z = transform.position.z;
